@@ -22,3 +22,21 @@ A arquitetura da solução se deu conforme diagrama abaixo:
 No desafio nada foi especificidado sobre o client da aplicação, muito menos requisitos mínimos de segurança, por este motivo apenas para fins de ilustração foram incluídos 2 possíveis _clients_ da aplicação: um web-app e outro servidor de aplicação, com formatos de autenticação sugeridos no diagrama.
 
 O objetivo de carregar a imagem imediatamente no Bucket S3 utilizando o **CLAIM-CHECK** _pattern_ visa mitigar uma possível perda de dados, caso o a instância que recebeu a requisição por algum motivo venha a "morrer" antes do processamento ser concluído pelo consumer existe a possibilidade de perder os dados de forma irreparável.
+
+Vale destacar que a implemetação do API Gateway foi meramente ilustrativa no diagrama, no repositório a solução está configurada para executar localmente por meio de containers.
+
+### Stack utilizada
+
+TODO
+
+### Estrutura do Diretório
+
+TODO
+
+### Configuração
+
+TODO
+
+### Testando a aplicação
+
+TODO

@@ -17,7 +17,7 @@ const createExpressApp = (db: Db) => {
     app.use(urlencoded({ extended: true }));
 
     // Routes
-    app.use('/api', makeTaskRouter(db));
+    app.use('/api', makeTaskRouter(db, config));
 
     return app;
 };

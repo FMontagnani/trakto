@@ -1,3 +1,4 @@
+import path from "node:path";
 import Task from "@core/entities/task";
 import { UploadFileError } from "@core/errors/ftp-errors/UploadFileError";
 import { StartTaskError } from "@core/errors/image-processor/StartTaskError";
@@ -10,10 +11,11 @@ export function imageProcessorBuilder(imageCommandRepository: TaskCommand, ftpHa
   return {
     async execute(fileData: Buffer, fileName: string): Promise<UploadTaskResult> {
       const taskId = Task.generateTaskId();
-      
+      const extension = path.extname(fileName);
+
       try {
         await imageCommandRepository.createTask({ id: taskId, status: TaskStatusEnum.PENDING, original_filename: fileName });
-        await ftpHandler.upload(fileData, taskId)
+        await ftpHandler.upload(fileData, `${taskId}${extension}`);
         
         return {
           taskId,

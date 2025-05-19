@@ -6,7 +6,7 @@
   "scripts": {
     "clear:node_modules": "rm -rf node_modules",
     "start": "ts-node src/adapters/api/app.ts",
-    "dev": "ts-node-dev  -r tsconfig-paths/register src/adapters/api/app.ts",
+    "dev": "chmod u+x scripts.sh ; ./scripts.sh dev",
     "test": "jest",
     "build": "tsc"
   },

@@ -27,16 +27,70 @@ Vale destacar que a implemetação do API Gateway foi meramente ilustrativa no d
 
 ### Stack utilizada
 
-TODO
+- Docker para containerização do APP
+- Typescript para desenvolvimento da aplicação
 
 ### Estrutura do Diretório
 
-TODO
+```
+.
+├── src
+    ├── adapters
+    │   ├── api
+    │   ├── lambda
+    │   ├── mongo
+    │   ├── rabbitmq
+    │   └── s3
+    ├── config
+    ├── core
+    │   ├── entities
+    │   ├── errors
+    │   ├── factories
+    │   └── image-processor
+    ├── ports
+    │   ├── input
+    │   └── output
+    └── types
+```
+
+- **adapters**: componentes que se comunicam com a infra/tecnologia utilizada, implementam portas de entrada/saída que foram definidas no diretório "ports".
+- **config**: arquivos de configuração do app.
+- **core**: camada de aplicação, implementam regras de negócio de forma agnóstica a infraestrutura utilizada.
+- **ports**: definem interfaces de comunicação entre a camada core e as tecnologias, uma mesma porta pode ser utilizada para dois tipos de tecnologia (exemplo, uma interface de repositório pode ter um adapter para MongoDB e outro para Postgres)
+- **types**: tipos específicos do projeto.
 
 ### Configuração
 
-TODO
+1. Clonar o repositório.
+2. Instalar a CLI [awslocal](https://github.com/localstack/awscli-local) (opcional) ou a CLI da [aws](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html) (obrigatório).
+2. Instalar as dependências: `$ npm i` .
+3. Adicionar permissão de execução para o arquivo scripts.sh: `$ sudo chmod +ux scripts.sh` .
+4. Executar o script de setup: `$ ./scripts.sh setup` .
+5. Compilar o projeto: `$ npm run build` .
+5. Executar localmente: `$ npm run build` .
 
 ### Testando a aplicação
 
-TODO
+Após as etapas de configuração:
+
+1. Realizar o upload de uma imagem:
+
+  `$ curl -F fileName={nome_arquivo.extensao_arquivo} -F file=@{caminho_para_arquivo} -X POST http://localhost:3000/api/tasks`
+
+2. Consultar o status do processamento:
+
+ `$ curl http://localhost:3000/api/tasks/idDaImagem`
+
+3. Consultar arquivos no bucket local:
+
+`$ awslocal s3 cp s3://trakto/low_{id_da_imagem}.jpeg low_copy.jpeg` -> baixa resolução
+`$ awslocal s3 cp s3://trakto/mid_{id_da_imagem}.jpeg low_copy.jpeg` -> média resolução
+`$ awslocal s3 cp s3://trakto/high_optimized_{id_da_imagem}.jpeg low_copy.jpeg` -> alta resolução
+
+## Considerações
+
+A solução não está completa, o prazo encerrou e não tive mais tempo para trabalhar nesse desafio, mesmo assim gostei bastante da proposta pois me permitiu revisitar algumas tecnologias que não trabalhava a algum tempo.
+
+A idéia inicial era de usar AWS Mq, porém o serviço não existe na versão community do Localstack, fui descobrir isso um pouco tarde e acabou comprometendo o tempo para a entrega final.
+
+Também tive alguns problemas para executar o APP dentro do container do Docker, embora o código transpilado rode na máquina local.

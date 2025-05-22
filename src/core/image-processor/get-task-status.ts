@@ -1,7 +1,7 @@
-import { TaskNotFoundError } from "@core/errors/image-processor/TaskNotFoundError";
-import { GetImageTaskStatusCommand } from "@ports/input/TaskProcessing"
-import { TaskQuery } from "@ports/output/TaskQuery";
-import { TaskStatusResult } from "../../types";
+import { TaskNotFoundError } from '../errors/image-processor/TaskNotFoundError';
+import { GetImageTaskStatusCommand } from '@ports/input/TaskProcessing';
+import { TaskQuery } from '@ports/output/TaskQuery';
+import { TaskStatusResult } from '../../types'
 
 export function getTaskStatusBuilder(imageQueryRepository: TaskQuery): GetImageTaskStatusCommand  {
   return {

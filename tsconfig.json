@@ -1,11 +1,7 @@
 {
+  "extends": "@tsconfig/node20/tsconfig.json",
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "commonjs",
-    "lib": ["ES2020"],
     "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist",
     "rootDir": "./src",
@@ -14,12 +10,11 @@
       "@adapters/*": ["src/adapters/*"],
       "@config/*": ["src/config/*"],
       "@core/*": ["src/core/*"],
-      "@ports/*": ["src/ports/*"],
-      "@types/*": ["src/types/*"],
+      "@ports/*": ["src/ports/*"]
     }
   },
   "ts-node": {
-    "require": ["tsconfig-paths/register"],
+    "require": ["tsconfig-paths/register"]
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts", "dist"]

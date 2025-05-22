@@ -1,6 +1,6 @@
-import { DeleteObjectCommand, GetObjectCommand, ListObjectsV2Command, PutObjectCommand, S3Client } from "@aws-sdk/client-s3"
-import { UploadFileError } from "@core/errors/ftp-errors/UploadFileError"
-import { FTPHandler } from "@ports/output/FTPHandler"
+import { DeleteObjectCommand, GetObjectCommand, ListObjectsV2Command, PutObjectCommand, S3Client } from '@aws-sdk/client-s3'
+import { UploadFileError } from '@core/errors/ftp-errors/UploadFileError'
+import { FTPHandler } from '@ports/output/FTPHandler'
 import { Config } from '@config/environment';
 
 let client: S3Client

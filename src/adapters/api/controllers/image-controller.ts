@@ -9,7 +9,7 @@ export const uploadImageBuilder = (command: ImageTaskProcessingCommand) => async
       return res.status(400).json({ message: 'No file uploaded' });
     }
 
-    const result = await command.execute(file.buffer, file.originalname);
+    const result = await command.execute(file.buffer, file.originalname, file.mimetype);
 
     return res.status(200).json(result);
   } catch (error) {

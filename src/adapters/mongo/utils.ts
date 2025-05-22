@@ -1,4 +1,4 @@
-import { Document, UUID } from "mongodb";
+import { Document, UUID } from 'mongodb';
 
 interface GenericSchema {
   id: string;

@@ -1,4 +1,4 @@
-import { TaskImageSchema, TaskImageSchemaWithId } from "../../types";
+import { TaskImageSchema, TaskImageSchemaWithId } from '../../types';
 
 export interface TaskCommand {
   createTask(task: TaskImageSchemaWithId): Promise<void>;

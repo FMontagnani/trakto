@@ -1,5 +1,5 @@
-import { ImageQuality } from "./Image"
-import { TaskStatus } from "./Task"
+import { ImageVersion } from './Image'
+import { TaskStatus } from './Task'
 
 export type TaskImageSchemaWithId = Partial<TaskImageSchema> & Pick<TaskImageSchema, 'id'>
 
@@ -7,22 +7,13 @@ export interface TaskImageSchema {
   id: string
   original_filename: string
   status: TaskStatus
-  original_metadata?: {
-    width: number
-    height: number
-    mimetype: string
-    exif: EXIF
-  }
+  'original_metadata.width': number
+  'original_metadata.height': number
+  'original_metadata.mimetype': string
+  'original_metadata.exif': EXIF
   processed_at: Date
   error_message?: string
-  versions?: {
-    filename: string
-    dimensions: {
-      width: number
-      height: number
-    }
-    quality: ImageQuality
-  }[]
+  versions?: ImageVersion[]
 }
 
 export interface EXIF {

@@ -8,6 +8,10 @@ export interface Config {
     uri: string;
     dbName: string;
   };
+  queue: {
+    queueName: string;
+    queueUrl: string;
+  };
   aws: {
     region: string;
     s3: {
@@ -26,6 +30,10 @@ export default {
   mongodb: {
     uri: process.env.MONGODB_URI || 'mongodb://localhost:27017/trakto',
     dbName: process.env.MONGODB_DB_NAME || 'trakto'
+  },
+  queue: {
+    queueName: process.env.QUEUE_NAME || 'trakto',
+    queueUrl: process.env.QUEUE_URL || 'amqp://user:password@localhost:5672',
   },
   aws: {
     region: process.env.AWS_REGION || 'us-east-1',

@@ -7,13 +7,11 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
-    volumes:
-      - ./uploads:/app/uploads
-      - ./processed:/app/processed
     environment:
       - NODE_ENV=development
       - MONGODB_URI=mongodb://mongo:27017/trakto
-      - RABBITMQ_URL=amqp://rabbitmq
+      - QUEUE_URL=amqp://user:password@rabbitmq:5672
+      - QUEUE_NAME=trakto
     depends_on:
       - mongo
       - rabbitmq
@@ -47,8 +45,9 @@ services:
       - "127.0.0.1:4510-4559:4510-4559"  # external services port range
     environment:
       # LocalStack configuration: https://docs.localstack.cloud/references/configuration/
-      - DEBUG=${DEBUG:-0}
-      - SERVICES=s3,lambda,apigateway,iam
+      - SERVICES=s3
+      - AWS_DEFAULT_REGION=us-east-1
+      - DOCKER_HOST=unix:///var/run/docker.sock
     volumes:
       - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
